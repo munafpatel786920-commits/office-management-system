@@ -1,0 +1,238 @@
+{
+  "entities": {
+    "Employee": {
+      "title": "Employee",
+      "description": "Employee record in HRMS",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 100 },
+        "avatar": { "type": "string" },
+        "department": { "type": "string" },
+        "designation": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "joiningDate": { "type": "string" },
+        "salary": { "type": "number" },
+        "status": { "type": "string", "enum": ["Active", "On Leave", "Remote", "Terminated"] },
+        "role": { "type": "string", "enum": ["SuperAdmin", "Admin", "Manager", "Employee"] }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "Department": {
+      "title": "Department",
+      "description": "Department record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "head": { "type": "string" },
+        "headCount": { "type": "number" },
+        "budget": { "type": "number" },
+        "description": { "type": "string" },
+        "color": { "type": "string" }
+      },
+      "required": ["id", "name"]
+    },
+    "Attendance": {
+      "title": "Attendance",
+      "description": "Attendance tracking record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "date": { "type": "string" },
+        "checkIn": { "type": "string" },
+        "checkOut": { "type": "string" },
+        "status": { "type": "string", "enum": ["Present", "Absent", "Late", "Half-day"] },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "employeeId", "date"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "Project or employee task record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string", "maxLength": 200 },
+        "description": { "type": "string" },
+        "priority": { "type": "string", "enum": ["Low", "Medium", "High", "Urgent"] },
+        "status": { "type": "string", "enum": ["Todo", "InProgress", "Completed"] },
+        "assignedTo": { "type": "string" },
+        "deadline": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "title", "assignedTo"]
+    },
+    "LeaveRequest": {
+      "title": "LeaveRequest",
+      "description": "Employee leave request record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "leaveType": { "type": "string", "enum": ["Annual", "Sick", "Casual", "Maternity"] },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "reason": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected"] },
+        "appliedDate": { "type": "string" }
+      },
+      "required": ["id", "employeeId", "leaveType", "startDate", "endDate"]
+    },
+    "Payroll": {
+      "title": "Payroll",
+      "description": "Employee monthly payroll record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "month": { "type": "string" },
+        "baseSalary": { "type": "number" },
+        "allowances": { "type": "number" },
+        "deductions": { "type": "number" },
+        "bonus": { "type": "number" },
+        "netSalary": { "type": "number" },
+        "status": { "type": "string", "enum": ["Paid", "Pending"] }
+      },
+      "required": ["id", "employeeId", "month", "netSalary"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Company announcement record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "author": { "type": "string" },
+        "date": { "type": "string" },
+        "priority": { "type": "string", "enum": ["General", "Important", "Urgent"] }
+      },
+      "required": ["id", "title", "content"]
+    },
+    "CompanyAsset": {
+      "title": "CompanyAsset",
+      "description": "Company hardware or access asset",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "assetName": { "type": "string" },
+        "serialNumber": { "type": "string" },
+        "category": { "type": "string" },
+        "assignedTo": { "type": "string" },
+        "assignedDate": { "type": "string" },
+        "status": { "type": "string", "enum": ["Assigned", "In Stock", "Under Maintenance"] }
+      },
+      "required": ["id", "assetName"]
+    },
+    "Appraisal": {
+      "title": "Appraisal",
+      "description": "Performance appraisal record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "reviewPeriod": { "type": "string" },
+        "rating": { "type": "number" },
+        "strengths": { "type": "string" },
+        "improvements": { "type": "string" },
+        "reviewer": { "type": "string" },
+        "reviewDate": { "type": "string" }
+      },
+      "required": ["id", "employeeId", "rating"]
+    },
+    "AppNotification": {
+      "title": "AppNotification",
+      "description": "Notification record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "time": { "type": "string" },
+        "read": { "type": "boolean" },
+        "type": { "type": "string" }
+      },
+      "required": ["id", "title", "message"]
+    },
+    "BuyerAccount": {
+      "title": "BuyerAccount",
+      "description": "App buyer license account created by Super Admin",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "password": { "type": "string" },
+        "companyName": { "type": "string" },
+        "plan": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "email", "password", "companyName"]
+    },
+    "AccessKey": {
+      "title": "AccessKey",
+      "description": "Staff PIN access key record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "key": { "type": "string", "maxLength": 4, "minLength": 4 },
+        "role": { "type": "string" },
+        "name": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "key", "role"]
+    }
+  },
+  "firestore": {
+    "/employees/{employeeId}": {
+      "schema": { "$ref": "#/entities/Employee" },
+      "description": "Employees collection"
+    },
+    "/departments/{departmentId}": {
+      "schema": { "$ref": "#/entities/Department" },
+      "description": "Departments collection"
+    },
+    "/attendance/{attendanceId}": {
+      "schema": { "$ref": "#/entities/Attendance" },
+      "description": "Attendance collection"
+    },
+    "/tasks/{taskId}": {
+      "schema": { "$ref": "#/entities/Task" },
+      "description": "Tasks collection"
+    },
+    "/leaveRequests/{leaveRequestId}": {
+      "schema": { "$ref": "#/entities/LeaveRequest" },
+      "description": "Leave requests collection"
+    },
+    "/payroll/{payrollId}": {
+      "schema": { "$ref": "#/entities/Payroll" },
+      "description": "Payroll collection"
+    },
+    "/announcements/{announcementId}": {
+      "schema": { "$ref": "#/entities/Announcement" },
+      "description": "Announcements collection"
+    },
+    "/assets/{assetId}": {
+      "schema": { "$ref": "#/entities/CompanyAsset" },
+      "description": "Assets collection"
+    },
+    "/appraisals/{appraisalId}": {
+      "schema": { "$ref": "#/entities/Appraisal" },
+      "description": "Appraisals collection"
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/AppNotification" },
+      "description": "Notifications collection"
+    },
+    "/buyerAccounts/{buyerAccountId}": {
+      "schema": { "$ref": "#/entities/BuyerAccount" },
+      "description": "Buyer accounts collection"
+    },
+    "/accessKeys/{accessKeyId}": {
+      "schema": { "$ref": "#/entities/AccessKey" },
+      "description": "Access keys collection"
+    }
+  }
+}

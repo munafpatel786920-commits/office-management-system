@@ -1,0 +1,6 @@
+{
+  "name": "WorkPulse - Modern Office Management System",
+  "description": "Comprehensive SaaS Office Management System for Employees, Attendance, Tasks, Leave, Payroll, and AI HR Insights.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
